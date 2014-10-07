@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="styles/bootstrap.min.css" rel="stylesheet" />
+    <title>Knockout ;)</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Vehicle orders</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: orders">
+                <tr>
+                    <td data-bind="text: customerName()"></td>
+                    <td data-bind="text: vehicle().vehicleName"></td>
+                    <td data-bind="text: formattedCost"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 data-bind="visible: orderTotal() > 0">
+            Order total: £<span data-bind="text: orderTotal().toLocaleString()"></span>
+        </h3>
+        <h2 class="text-center">Edit vehicle orders</h2>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Vehicle</th>
+                    <th>Cost</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: orders">
+                <tr>
+                    <td><input data-bind="value: customerName"/></td>
+                    <td><select data-bind="options: $root.availableVehicles,
+                                           value: vehicle,
+                                           optionsText: 'vehicleName'"/></td>
+                    <td data-bind="text: formattedCost"></td>
+                    <td><a href="#" data-bind="click: $root.removeVehicleOrder">Remove</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-default" data-bind="click: addVehicleOrder">Add order</button>
+
+    </div>
+    <script src="scripts/knockout-3.2.2.js"></script>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
